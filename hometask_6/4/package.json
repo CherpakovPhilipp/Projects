@@ -1,0 +1,15 @@
+{
+  "name": "3",
+  "version": "1.0.0",
+  "description": "file system random",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "createDir": "node index.js"
+  },
+  "author": "Philip",
+  "license": "ISC",
+  "dependencies": {
+    "file-system": "^2.2.2"
+  }
+}

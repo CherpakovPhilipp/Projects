@@ -1,0 +1,16 @@
+{
+  "name": "5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "weather.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node weather.js"
+  },
+  "author": "Philip",
+  "license": "ISC",
+  "dependencies": {
+    "file-system": "^2.2.2",
+    "wttr": "0.0.4"
+  }
+}
