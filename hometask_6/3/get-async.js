@@ -9,7 +9,7 @@ getAsync = (url) => new Promise((resolve,reject) => {
 
     res.on('data', data => response += data);
     res.on('end', () => { 
-      try{                              // проверка на то, какие данные приходят:
+      try {                              // проверка на то, какие данные приходят:
         resolve(JSON.parse(response))   // если приходит валидный JSON - парсим его
       } catch{                          // если это не JSON - выводим как есть
         resolve(response)
