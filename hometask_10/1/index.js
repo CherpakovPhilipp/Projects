@@ -40,9 +40,17 @@ const server = http.createServer((req, res) => {
           res.end('<strong>Error!</strong>');
           throw new Error('Error while reading index.html');
       };
+
+      const date = new Date();
+      const farmatDate = {
+        year: date.getFullYear(),
+        month: (date.getMonth() > 10) ? date.getMonth() : '0' + (date.getMonth() + 1),
+        day:  (date.getDay() > 10) ? date.getDay() : '0' + date.getDay()
+      }
+      
+      data += `<span style="position: fixed; bottom: 15px; right: 15px;">${ [farmatDate.year, farmatDate.month, farmatDate.day].join('.') }</span>`;
       res.end(data);
   });
-
 });
 
 server.listen(5000, () => {
