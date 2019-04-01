@@ -3,13 +3,13 @@ const fs = require('fs');
 
 const server = http.createServer((req, res) => {
   res.setHeader('Content-Type', 'text/html');
-  
 
   const fileName = req.url.split('/').splice(-1).join();
-  const fileExt = '.' + fileName.split('.').splice(-1).join();
-  const extensArr = ['.png', '.jpg', '.jpeg', '.bmp', '.gif'];
+  const extensArr = ['png', 'jpg', 'jpeg', 'bmp', 'gif'];
+  const reg1 = new RegExp('\\.' + extensArr.join('|') + '$');
+  const reg2 = new RegExp('\\.js$');
 
-  if (extensArr.includes(fileExt)) {
+  if ( reg1.test(req.url) ) {
     fs.readFile(fileName, (err, data) => {
       if (err) {
         res.end();
@@ -21,7 +21,7 @@ const server = http.createServer((req, res) => {
     return;
   }
   
-  if (req.url === '/main.js'){
+  if ( reg2.test(req.url)){
     res.setHeader('Content-Type', 'text/javascript');
 
     fs.readFile('main.js', 'utf-8', (err, data) => {

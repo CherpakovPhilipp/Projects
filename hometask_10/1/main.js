@@ -1,3 +1,7 @@
-const img = document.querySelector('img');
+document.addEventListener("DOMContentLoaded", function() { 
+  const img = document.querySelector('img');
 
-console.log('Width: ', img.width, '; Height: ', img.height);
+  console.log('Width: ', img.width);
+  console.log('Height: ', img.height);
+});
+ 
