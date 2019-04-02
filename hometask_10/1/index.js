@@ -6,10 +6,10 @@ const server = http.createServer((req, res) => {
 
   const fileName = req.url.split('/').splice(-1).join();
   const extensArr = ['png', 'jpg', 'jpeg', 'bmp', 'gif'];
-  const reg1 = new RegExp('\\.' + extensArr.join('|') + '$');
-  const reg2 = new RegExp('\\.js$');
+  const regImg = new RegExp('\\.' + extensArr.join('|') + '$');
+  const regScript = new RegExp('\\.js$');
 
-  if ( reg1.test(req.url) ) {
+  if ( regImg.test(req.url) ) {
     fs.readFile(fileName, (err, data) => {
       if (err) {
         res.end();
@@ -21,14 +21,13 @@ const server = http.createServer((req, res) => {
     return;
   }
   
-  if ( reg2.test(req.url)){
+  if ( regScript.test(req.url)){
     res.setHeader('Content-Type', 'text/javascript');
-
     fs.readFile('main.js', 'utf-8', (err, data) => {
       
         if (err) {
-            res.end('<strong>Error!</strong>');
-            throw new Error('Error while reading index.html');
+            res.end();
+            throw new Error('Error while reading file:' + err);
         };
         res.end(data);
     });
@@ -37,8 +36,8 @@ const server = http.createServer((req, res) => {
   
   fs.readFile('index.html', 'utf-8', (err, data) => {
       if (err) {
-          res.end('<strong>Error!</strong>');
-          throw new Error('Error while reading index.html');
+          res.end();
+          throw new Error('Error while reading file:' + err);
       };
 
       const date = new Date();
@@ -48,8 +47,10 @@ const server = http.createServer((req, res) => {
         day:  (date.getDay() > 10) ? date.getDay() : '0' + date.getDay()
       }
       
-      data += `<span style="position: fixed; bottom: 15px; right: 15px;">${ [farmatDate.year, farmatDate.month, farmatDate.day].join('.') }</span>`;
-      res.end(data);
+      const substr = "<h1>Content</h1>";
+      const dateElem = `<span style="position: fixed; bottom: 15px; right: 15px;">${ [farmatDate.year, farmatDate.month, farmatDate.day].join('.') }</span>`;
+      
+      res.end(data.split(substr).join(substr + dateElem));
   });
 });
 
